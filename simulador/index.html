@@ -1,0 +1,788 @@
+<section id="base-menu" class="d-flex align-items-center"></section>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center titulos">Simulador</h1>
+    </div>
+    <!--FORMULARIO-->
+       <!-- <form  id="formDatos" class="row g-3 needs-validation" novalidate>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="aniosProyecto" class="form-label margen-top-10">Número de años: <br></label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">#</span>
+                    <input type="number" min="1" class="form-control" id="aniosProyecto" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="limiteProd" class="form-label margen-top-10">Límite producción de unidades por año:<br></label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">U</span>
+                    <input type="number" class="form-control" min="1" id="limiteProd" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="precioUnidadTerceros" class="form-label margen-top-10">Precio por unidad extra producida por terceros:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="precioUnidadTerceros" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="tasaMin" class="form-label margen-top-10">Tasa mínima de aceptación:<br></label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="tasaMin" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="unidadesVend" class="form-label margen-top-10">Unidades vendidas esperadas:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">U</span>
+                    <input type="number" min="1" class="form-control" id="unidadesVend" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="tasaAnualUni" class="form-label margen-top-10">Tasa de crecimiento anual de unidades:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="tasaAnualUni" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="precioUnidad" class="form-label margen-top-10">Precio por unidad:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="precioUnidad" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="tasaAnualPrecio" class="form-label margen-top-10">Tasa del crecimiento anual del precio:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="tasaAnualPrecio" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <!--Gastos-->
+        <!--<div class="row">
+            <div class="col-md-3">
+                <label for="gastosAdmUni" class="form-label margen-top-10">Gastos de administración por unidad:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="gastosAdmUni" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="incrementoAnualGastAdm" class="form-label margen-top-10">Incremento anual de los gastos de administración:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="incrementoAnualGastAdm" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="gastosVentUnidad" class="form-label margen-top-10">Gastos de venta por unidad:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="gastosVentUnidad" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="incrementoAnualGastVenta" class="form-label margen-top-10">Incremento anual de los gastos de venta:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="incrementoAnualGastVenta" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <!---MATERIAS PRIMAS-->
+        <!--<div class="row">
+            <div class="col-md-3">
+                <label for="costoA" class="form-label margen-top-10">Costo de materia prima A por unidad:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="costoA" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="incrementoCostoAnualA" class="form-label margen-top-10">Incremento anual del costo de materia prima A:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="incrementoCostoAnualA" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="costoB" class="form-label margen-top-10">Costo de materia prima B por unidad:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="costoB" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="incrementoCostoAnualB" class="form-label margen-top-10">Incremento anual del costo de materia prima B:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="incrementoCostoAnualB" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <!--COSTOS-->
+        <!--<div class="row">
+            <div class="col-md-4">
+                <label for="costoMateriales" class="form-label margen-top-10">Costo de materiales por unidad:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="costoMateriales" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="incrementoCostoMateriales" class="form-label margen-top-10">Incremento anual del costo de materiales:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="incrementoCostoMateriales" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="costoManoObra" class="form-label margen-top-10">Costo de mano de obra por unidad:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="costoManoObra" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="incrementoCostoManoObra" class="form-label margen-top-10">Incremento anual del costo de mano de obra:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="incrementoCostoManoObra" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="costoAnualMantEqu" class="form-label margen-top-10">Costo anual de mantenimiento del equipo:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="costoAnualMantEqu" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="incrementoCostoAnualMantEqu" class="form-label margen-top-10">Incremento anual del costo del mantenimiento de equipo:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">%</span>
+                    <input type="number" min="0" class="form-control" id="incrementoCostoAnualMantEqu" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        
+        <!---VALORES-->
+        <!--<div class="row">
+            <div class="col-md-2">
+                <label for="valorTerreno" class="form-label margen-top-10">Valor del terreno:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="valorTerreno" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="valorEdificio" class="form-label margen-top-10">Valor del edificio:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="valorEdificio" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="valorRecEdi" class="form-label margen-top-10">Valor de recuperación del edificio:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="1" class="form-control" id="valorRecEdi" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="vidaEdi" class="form-label margen-top-10">Vida útil del edificio:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">#</span>
+                    <input type="number" min="0" class="form-control" id="vidaEdi" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label for="valorEqui" class="form-label margen-top-10">Valor del equipo:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="valorEqui" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="valorRecEqu" class="form-label margen-top-10">Valor de recuperación del equipo:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="valorRecEqu" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="vidaEqu" class="form-label margen-top-10">Vida útil del equipo:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">#</span>
+                    <input type="number" min="0" class="form-control" id="vidaEqu" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!--CAPITAL TRABAJO-->
+        <!--<div class="row">
+            <div class="col-md-3">
+                <label for="capTrabajo" class="form-label margen-top-10">Capital de trabajo:</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" min="0" class="form-control" id="capTrabajo" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!--BOTON-->
+        <!--<div class="row">
+            <div class="col-12">
+                <p class="margen-top-10"><button class="btn btn-primary" type="submit">Submit form</button></p>
+              </div>
+        </div>
+    </form>-->
+    <!--FIN FORMULARIO-->
+</div><!--Fin container-->
+
+
+
+
+<!-- ======= Why Us Section ======= -->
+<section class=" why-us section-bg">
+    <div class="col-md-12 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+        <div class="content">
+            <h3><strong>Simulador</strong></h3>
+            <p>
+            Ingresa los datos:
+            </p>
+        </div>
+        <form  id="formDatos" class="row g-3 needs-validation" novalidate>
+        <div class="accordion-list">
+            <ul>
+            <li>
+                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span>Unidades <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
+                    
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="aniosProyecto" class="form-label margen-top-10">Número de años: <br></label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">#</span>
+                                <input type="number" min="1" class="form-control" id="aniosProyecto" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="limiteProd" class="form-label margen-top-10">Límite producción de unidades por año:<br></label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">U</span>
+                                <input type="number" class="form-control" min="1" id="limiteProd" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="precioUnidadTerceros" class="form-label margen-top-10">Precio por unidad extra producida por terceros:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="precioUnidadTerceros" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="tasaMin" class="form-label margen-top-10">Tasa mínima de aceptación:<br></label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="tasaMin" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="unidadesVend" class="form-label margen-top-10">Unidades vendidas esperadas:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">U</span>
+                                <input type="number" min="1" class="form-control" id="unidadesVend" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tasaAnualUni" class="form-label margen-top-10">Tasa de crecimiento anual de unidades:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="tasaAnualUni" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="precioUnidad" class="form-label margen-top-10">Precio por unidad:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="precioUnidad" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="tasaAnualPrecio" class="form-label margen-top-10">Tasa del crecimiento anual del precio:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="tasaAnualPrecio" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Costos y gastos <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
+                    
+
+                    <!--Gastos-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="gastosAdmUni" class="form-label margen-top-10">Gastos de administración por unidad:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="gastosAdmUni" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="incrementoAnualGastAdm" class="form-label margen-top-10">Incremento anual de los gastos de administración:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="incrementoAnualGastAdm" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="gastosVentUnidad" class="form-label margen-top-10">Gastos de venta por unidad:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="gastosVentUnidad" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="incrementoAnualGastVenta" class="form-label margen-top-10">Incremento anual de los gastos de venta:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="incrementoAnualGastVenta" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!---MATERIAS PRIMAS-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="costoA" class="form-label margen-top-10">Costo de materia prima A por unidad:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="costoA" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="incrementoCostoAnualA" class="form-label margen-top-10">Incremento anual del costo de materia prima A:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="incrementoCostoAnualA" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="costoB" class="form-label margen-top-10">Costo de materia prima B por unidad:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="costoB" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="incrementoCostoAnualB" class="form-label margen-top-10">Incremento anual del costo de materia prima B:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="incrementoCostoAnualB" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!--COSTOS-->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="costoMateriales" class="form-label margen-top-10">Costo de materiales por unidad:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="costoMateriales" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="incrementoCostoMateriales" class="form-label margen-top-10">Incremento anual del costo de materiales:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="incrementoCostoMateriales" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="costoManoObra" class="form-label margen-top-10">Costo de mano de obra por unidad:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="costoManoObra" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="incrementoCostoManoObra" class="form-label margen-top-10">Incremento anual del costo de mano de obra:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="incrementoCostoManoObra" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="costoAnualMantEqu" class="form-label margen-top-10">Costo anual de mantenimiento del equipo:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="costoAnualMantEqu" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="incrementoCostoAnualMantEqu" class="form-label margen-top-10">Incremento anual del costo del mantenimiento de equipo:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">%</span>
+                                <input type="number" min="0" class="form-control" id="incrementoCostoAnualMantEqu" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+
+            <li>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Equipo y terreno <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
+                
+
+                    <!---VALORES-->
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="valorTerreno" class="form-label margen-top-10">Valor del terreno:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="valorTerreno" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="valorEdificio" class="form-label margen-top-10">Valor del edificio:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="valorEdificio" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="valorRecEdi" class="form-label margen-top-10">Valor de recuperación del edificio:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="1" class="form-control" id="valorRecEdi" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="vidaEdi" class="form-label margen-top-10">Vida útil del edificio:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">#</span>
+                                <input type="number" min="0" class="form-control" id="vidaEdi" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="valorEqui" class="form-label margen-top-10">Valor del equipo:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="valorEqui" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="valorRecEqu" class="form-label margen-top-10">Valor de recuperación del equipo:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="valorRecEqu" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="vidaEqu" class="form-label margen-top-10">Vida útil del equipo:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">#</span>
+                                <input type="number" min="0" class="form-control" id="vidaEqu" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--CAPITAL TRABAJO-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="capTrabajo" class="form-label margen-top-10">Capital de trabajo:</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">$</span>
+                                <input type="number" min="0" class="form-control" id="capTrabajo" value="Mark" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </li>
+
+            </ul>
+            <!--BOTON-->
+            <div class="row">
+                <div class="col-12">
+                    <p class="margen-top-10"><button class="btn btn-primary" type="submit">Submit form</button></p>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</section>
+<!-------fin section-->
+
+
+
+<div class="container">
+    <!--TABLAS-->
+    <div class="row" id="divGastos"></div>
+    <div class="row" id="divDepreciacion"></div>
+    <div class="row" id="divCostosProd"></div>
+    <div class="row" id="divEstadoRes"></div>
+    <div class="row" >
+        <table class="table table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div><!--fin container-->
