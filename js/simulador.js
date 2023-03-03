@@ -480,7 +480,7 @@ $(document).ready(function(){
             {
               if (parseFloat(utilidadantesimpuedo[i])>=0  && parseFloat(utilidadantesimpuedo[i])<=999 ) 
               {
-                impuestoedo[i]=parseFloat(utilidadantesimpuedo[i])*.05
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.05)
               }
               else if(parseFloat(utilidadantesimpuedo[i])>=1000  && parseFloat(utilidadantesimpuedo[i])<=9999 )
               {
