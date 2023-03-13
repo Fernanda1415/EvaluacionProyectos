@@ -1,5 +1,11 @@
 $(document).ready(function(){      
+  
+    //Arreglo que guardara la lista de las materias primas
+    var MateriasPrimas=[];
+    //id que tendra cada materia prima
+    var id=1;
     
+    document.getElementById('divTablaMatP').style.display='none';
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
     
@@ -19,8 +25,12 @@ $(document).ready(function(){
       $('#formDatos').on('submit',function(event){
         if (!event.isDefaultPrevented()) {//si el submit es valido
             // everything looks good!
-            
             event.preventDefault();
+            //Checar si al menos hay una materia prima en el arreglo
+            if(MateriasPrimas.length>0)
+            {
+
+            
             console.log('correcto');
             //console.log(document.querySelector("#aniosProyecto").value);
             /////////////////////////////////////////////
@@ -36,10 +46,10 @@ $(document).ready(function(){
             var incrementoAnualGastAdm =document.querySelector("#incrementoAnualGastAdm").value;
             var gastosVentUnidad=document.querySelector("#gastosVentUnidad").value;
             var incrementoAnualGastVenta=document.querySelector("#incrementoAnualGastVenta").value;
-            var costoA=document.querySelector("#costoA").value;
-            var incrementoCostoAnualA=document.querySelector("#incrementoCostoAnualA").value;
-            var costoB=document.querySelector("#costoB").value;
-            var incrementoCostoAnualB=document.querySelector("#incrementoCostoAnualB").value;
+            //var costoA=document.querySelector("#costoA").value;
+            //var incrementoCostoAnualA=document.querySelector("#incrementoCostoAnualA").value;
+            //var costoB=document.querySelector("#costoB").value;
+            //var incrementoCostoAnualB=document.querySelector("#incrementoCostoAnualB").value;
             var costoMateriales=document.querySelector("#costoMateriales").value;
             var incrementoCostoMateriales=document.querySelector("#incrementoCostoMateriales").value;
             var costoManoObra=document.querySelector("#costoManoObra").value;
@@ -97,6 +107,13 @@ $(document).ready(function(){
             var inversioninicial;
             var sumasaldofinal;
             var sumaflujoefecdesc;
+
+            var totalCostosProdMatP=[];//nuevo
+            for(var i=0;i<aniosProyecto;i++)
+            {
+              totalCostosProdMatP[i]=parseFloat(0)
+            }
+            
             ////////////////////////////////////////////
             var codigo='';
             //////////////////////////////////////////////
@@ -124,11 +141,11 @@ $(document).ready(function(){
 
             codigo+='<tr><td>Precio</td>';
             precioporanio[0]=precioUnidad;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(precioporanio[0]).toFixed(2))+'</td>';
+            codigo+='<td class="text-end">$'+parseFloat(precioporanio[0]).toFixed(2)+'</td>';
             for (let i = 1; i < aniosProyecto; i++) 
             {
                 precioporanio[i]=precioporanio[i-1]*(1+parseFloat(tasaAnualPrecio/100));
-                codigo+='<td class="text-end">'+formMoneda.format(parseFloat(precioporanio[i]).toFixed(2))+'</td>';
+                codigo+='<td class="text-end">$'+parseFloat(precioporanio[i]).toFixed(2)+'</td>';
             }
 
             codigo+='</tr>';
@@ -136,20 +153,20 @@ $(document).ready(function(){
             codigo+='<tr><td>Gastos de venta</td>';
             
             gastoventaanio[0]=gastosVentUnidad;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(gastoventaanio[0]).toFixed(2))+'</td>';
+            codigo+='<td class="text-end">$'+parseFloat(gastoventaanio[0]).toFixed(2)+'</td>';
             for (let i = 1; i < aniosProyecto; i++) {
             gastoventaanio[i]=gastoventaanio[i-1]*(1+parseFloat(incrementoAnualGastVenta/100));
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(gastoventaanio[i]).toFixed(2))+'</td>';
+            codigo+='<td class="text-end">$'+parseFloat(gastoventaanio[i]).toFixed(2)+'</td>';
             }
             codigo+='</tr>';
 
             codigo+='<tr><td>Gastos de administración</td>';
             gastoadminanio[0]=gastosAdmUni;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(gastoadminanio[0]).toFixed(2))+'</td>';
+            codigo+='<td class="text-end">$'+parseFloat(gastoadminanio[0]).toFixed(2)+'</td>';
             for (let i = 1; i < aniosProyecto; i++) 
             {
                 gastoadminanio[i]=gastoadminanio[i-1]*(1+parseFloat(incrementoAnualGastAdm/100));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(gastoadminanio[i]).toFixed(2))+'</td>';
+              codigo+='<td class="text-end">$'+parseFloat(gastoadminanio[i]).toFixed(2)+'</td>';
             }
 
             codigo+='</tr>';
@@ -161,19 +178,19 @@ $(document).ready(function(){
             codigo+='<table class="table table-bordered"><thead class="table-dark"><tr><th class="text-center" colspan="2">Depreciación</th></tr></thead>';
             codigo+='<tr><td>Depreciación del edificio</td>';
             depreedif=(parseFloat(valorEdificio)-parseFloat(valorRecEdi))/parseFloat(vidaEdi)
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(depreedif).toFixed(2))+"</td>"
+            codigo+='<td class="text-end">$'+parseFloat(depreedif).toFixed(2)+"</td>"
             codigo+="</tr>"
 
             codigo+="<tr>"
             depreequi=(parseFloat(valorEqui)-parseFloat(valorRecEqu))/parseFloat(vidaEqu)
             codigo+="<td>Depreciación de equipo</td>"
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(depreequi).toFixed(2))+"</td>"
+            codigo+='<td class="text-end">$'+parseFloat(depreequi).toFixed(2)+"</td>"
             codigo+="</tr>"
 
             codigo+="<tr>"
             totalDepreciacion=parseFloat(depreedif)+parseFloat(depreequi);
             codigo+="<th>Total de la depreciación</th>"
-            codigo+='<th class="text-end">'+formMoneda.format(parseFloat(totalDepreciacion).toFixed(2))+"</th>"
+            codigo+='<th class="text-end">$'+parseFloat(totalDepreciacion).toFixed(2)+"</th>"
             codigo+="</tr>"
 
             codigo+='</tbody></table>';
@@ -186,104 +203,88 @@ $(document).ready(function(){
               codigo+='<th scope="col" class="text-center">'+i+'</th>'
             };
             codigo+="</tr></thead><tbody>"
-            codigo+="<tr>"
-          
-            codigo+="<td>Costos de materia prima A</td>"
-            costomateriaAanio[0]=costoA;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomateriaAanio[0]).toFixed(2))+"</td>"
-            for (var i = 1; i < aniosProyecto; i++) 
+            
+            for(var i=0;i<MateriasPrimas.length;i++)
             {
-              costomateriaAanio[i]=costomateriaAanio[i-1]*(1+parseFloat(incrementoCostoAnualA/100));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomateriaAanio[i]).toFixed(2))+"</td>"
-            }
-            codigo+="</tr>"
-          
-            codigo+="<tr>"
-            codigo+="<td>Total de costos de materia prima A</td>"
-            totalcostomateriaAanio[0]=parseFloat(unidadesporanio[0])*parseFloat(costomateriaAanio[0]);
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomateriaAanio[0]).toFixed(2))+"</td>"
-            for (var i = 1; i < aniosProyecto; i++) 
-            {
-              totalcostomateriaAanio[i]=parseFloat(totalcostomateriaAanio[i-1])+parseFloat(totalcostomateriaAanio[i-1]*(incrementoCostoAnualA/100));//Nvos cambios
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomateriaAanio[i]).toFixed(2))+"</td>"
-            } 
-            codigo+="</tr>"
+              codigo+="<tr>"
+              codigo+='<td>Costos de materia prima '+MateriasPrimas[i].nombre+'</td>'
+              var costosMaterias=[];
+              costosMaterias[0]=MateriasPrimas[i].costo;
+              codigo+='<td class="text-end">$'+parseFloat(costosMaterias[0]).toFixed(2)+"</td>"
+              for (var j = 1; j < aniosProyecto; j++) 
+              {
+                costosMaterias[j]=costosMaterias[j-1]*(1+parseFloat(MateriasPrimas[i].incCosto/100));
+                codigo+='<td class="text-end">$'+parseFloat(costosMaterias[j]).toFixed(2)+"</td>"
+              }
+              codigo+="</tr>"
 
-            codigo+="<tr>"
-            codigo+="<td>Costos de materia prima B</td>"
-          
-            costomateriaBanio[0]=costoB;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomateriaBanio[0]).toFixed(2))+"</td>"
-            for (var i = 1; i < aniosProyecto; i++) 
-            {
-              costomateriaBanio[i]=costomateriaBanio[i-1]*(1+parseFloat(incrementoCostoAnualB/100));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomateriaBanio[i]).toFixed(2))+"</td>"
+              codigo+='<tr>'
+              var totalcostosMateriasP=[];
+              codigo+='<td>Total de costos de materia prima '+MateriasPrimas[i].nombre+'</td>'
+              totalcostosMateriasP[0]=parseFloat(unidadesporanio[0])*parseFloat(costosMaterias[0]);
+              totalCostosProdMatP[0]=parseFloat(totalCostosProdMatP[0])+parseFloat(totalcostosMateriasP[0]);//nuevo
+              codigo+='<td class="text-end">$'+parseFloat(totalcostosMateriasP[0]).toFixed(2)+"</td>"
+              for (var j = 1; j < aniosProyecto; j++) 
+              {
+                totalcostosMateriasP[j]=parseFloat(unidadesporanio[j])*parseFloat(costosMaterias[j]);
+                totalCostosProdMatP[j]=parseFloat(totalCostosProdMatP[j])+parseFloat(totalcostosMateriasP[j]);
+                codigo+='<td class="text-end">$'+parseFloat(totalcostosMateriasP[j]).toFixed(2)+"</td>"
+              } 
+              codigo+='</tr>'
             }
-            codigo+="</tr>"
-
-            codigo+="<tr>"
-            codigo+="<td>Total de costos de materia prima B</td>"
-            totalcostomateriaBanio[0]=parseFloat(unidadesporanio[0])*parseFloat(costomateriaBanio[0]);
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomateriaBanio[0]).toFixed(2))+"</td>"
-            for (var i = 1; i < aniosProyecto; i++) 
-            {
-              totalcostomateriaBanio[i]=parseFloat(totalcostomateriaBanio[i-1])+parseFloat(totalcostomateriaBanio[i-1]*(incrementoCostoAnualB/100));//Nvos cambio
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomateriaBanio[i]).toFixed(2))+"</td>"
-            }
-            codigo+="</tr>"
-             
+              
             codigo+="<tr>"
             codigo+="<td>Costos de materiales</td>"
             costomaterialesanio[0]=costoMateriales;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomaterialesanio[0]).toFixed(2))+"</td>"
+            codigo+='<td class="text-end">$'+parseFloat(costomaterialesanio[0]).toFixed(2)+"</td>"
             for (var i = 1; i < aniosProyecto; i++) 
             {
               costomaterialesanio[i]=costomaterialesanio[i-1]*(1+parseFloat(incrementoCostoMateriales/100));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomaterialesanio[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(costomaterialesanio[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr>"
 
             codigo+="<tr>"
             codigo+="<td>Total de costos de materiales</td>"
             totalcostomateriales[0]=parseFloat(unidadesporanio[0])*parseFloat(costomaterialesanio[0]);
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomateriales[0]).toFixed(2))+"</td>"
+            codigo+='<td class="text-end">$'+parseFloat(totalcostomateriales[0]).toFixed(2)+"</td>"
             for (var i = 1; i < aniosProyecto; i++) 
             {
-              totalcostomateriales[i]=parseFloat(totalcostomateriales[i-1])*parseFloat(1+incrementoCostoMateriales/100);//nvos cambios 
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomateriales[i]).toFixed(2))+"</td>"
+              totalcostomateriales[i]=parseFloat(unidadesporanio[i])*parseFloat(costomaterialesanio[i]);
+              codigo+='<td class="text-end">$'+parseFloat(totalcostomateriales[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr>"
 
             codigo+="<tr>"
             codigo+="<td>Costos de mano de obra</td>"
             costomanoobraanio[0]=costoManoObra;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomanoobraanio[0]).toFixed(2))+"</td>"
+            codigo+='<td class="text-end">$'+parseFloat(costomanoobraanio[0]).toFixed(2)+"</td>"
             for (var i = 1; i < aniosProyecto; i++) 
             {
               costomanoobraanio[i]=costomanoobraanio[i-1]*(1+parseFloat(incrementoCostoManoObra/100));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomanoobraanio[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(costomanoobraanio[i]).toFixed(2)+"</td>"
             };
             codigo+="</tr>"
           
             codigo+="<tr>"
             codigo+="<td>Total de costos de mano de obra</td>"
             totalcostomanoobraanio[0]=parseFloat(unidadesporanio[0])*parseFloat(costomanoobraanio[0]);
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomanoobraanio[0]).toFixed(2))+"</td>"
+            codigo+='<td class="text-end">$'+parseFloat(totalcostomanoobraanio[0]).toFixed(2)+"</td>"
             for (var i = 1; i < aniosProyecto; i++) 
             {
-              totalcostomanoobraanio[i]=parseFloat(totalcostomanoobraanio[i-1])*parseFloat(1+incrementoCostoManoObra/100);
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostomanoobraanio[i]).toFixed(2))+"</td>"
+              totalcostomanoobraanio[i]=parseFloat(unidadesporanio[i])*parseFloat(costomanoobraanio[i]);
+              codigo+='<td class="text-end">$'+parseFloat(totalcostomanoobraanio[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr>"
           
             codigo+="<tr>"
             codigo+="<td>Costos de mantenimiento de equipo</td>"
             costomantenimientoequipoanio[0]=costoAnualMantEqu;
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomantenimientoequipoanio[0]).toFixed(2))+"</td>"
+            codigo+='<td class="text-end">$'+parseFloat(costomantenimientoequipoanio[0]).toFixed(2)+"</td>"
             for (var i = 1; i < aniosProyecto; i++) 
             {
               costomantenimientoequipoanio[i]=costomantenimientoequipoanio[i-1]*(1+parseFloat(incrementoCostoAnualMantEqu/100));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomantenimientoequipoanio[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(costomantenimientoequipoanio[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr>"
         
@@ -291,8 +292,8 @@ $(document).ready(function(){
             codigo+="<td>Total de costos de producción</td>"
             for (var i =0; i < aniosProyecto; i++) 
             {
-              totalcostoproduccion[i]=parseFloat(totalcostomateriaAanio[i])+parseFloat(totalcostomateriaBanio[i])+parseFloat(totalcostomateriales[i])+parseFloat(totalcostomanoobraanio)+parseFloat(costomantenimientoequipoanio[i]);
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostoproduccion[i]).toFixed(2))+"</td>"
+              totalcostoproduccion[i]=parseFloat(totalCostosProdMatP[i])+parseFloat(totalcostomateriales[i])+parseFloat(totalcostomanoobraanio)+parseFloat(costomantenimientoequipoanio[i]);
+              codigo+='<td class="text-end">$'+parseFloat(totalcostoproduccion[i]).toFixed(2)+"</td>"
             };
             codigo+="</tr></tbody></table>"
           
@@ -323,12 +324,12 @@ $(document).ready(function(){
             for(var i = 0; i < 5; i++)
             {
               cargoextraanio[i]=0;
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(0).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(0).toFixed(2)+"</td>"
             }
             for (var i = 5; i < aniosProyecto; i++) 
             {
               cargoextraanio[i]=parseFloat(unidadesadicionalesanio[i])*parseFloat(precioUnidadTerceros);
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(cargoextraanio[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(cargoextraanio[i]).toFixed(2)+"</td>"
             }
             codigo+='</tr>'
 
@@ -337,7 +338,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               costoproducciontotalesanio[i]=parseFloat(totalcostoproduccion[i])+parseFloat(cargoextraanio[i]);
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costoproducciontotalesanio[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(costoproducciontotalesanio[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr></tbody></table>"
           
@@ -566,7 +567,7 @@ $(document).ready(function(){
             codigo+="<td>Costos de producción</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costoproducciontotalesanio[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(costoproducciontotalesanio[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr>"
 
@@ -574,7 +575,7 @@ $(document).ready(function(){
             codigo+="<td>Gastos por ventas</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(gastoventaedo[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(gastoventaedo[i]).toFixed(2)+"</td>"
             }
 
             codigo+="</tr>"
@@ -582,7 +583,7 @@ $(document).ready(function(){
             codigo+="<td>Gastos por administración</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(gastoadminedo[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(gastoadminedo[i]).toFixed(2)+"</td>"
             }
 
             codigo+="</tr>"
@@ -597,7 +598,7 @@ $(document).ready(function(){
             codigo+="<td>IVA</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(ivaedo[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(ivaedo[i]).toFixed(2)+"</td>"
             }
 
             codigo+="</tr>"
@@ -605,7 +606,7 @@ $(document).ready(function(){
             codigo+="<td>Impuestos</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(impuestoedo[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(impuestoedo[i]).toFixed(2)+"</td>"
             }
 
             codigo+="</tr>"
@@ -616,12 +617,12 @@ $(document).ready(function(){
               if ((i+1)%5==0) 
               {
                 equipoegreso[i]=valorEqui
-                codigo+='<td class="text-end">'+formMoneda.format(parseFloat(valorEqui).toFixed(2))+"</td>"
+                codigo+='<td class="text-end">$'+parseFloat(valorEqui).toFixed(2)+"</td>"
               }
               else
               {
                 equipoegreso[i]=0
-                codigo+='<td class="text-end">'+formMoneda.format(parseFloat(0).toFixed(2))+"</td>"
+                codigo+='<td class="text-end">$'+parseFloat(0).toFixed(2)+"</td>"
               }
             }
 
@@ -631,7 +632,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               totalEgreso[i]=(parseFloat(costoproducciontotalesanio[i])+parseFloat(gastoventaedo[i])+parseFloat(gastoadminedo[i])+parseFloat(0)+parseFloat(ivaedo[i])+parseFloat(impuestoedo[i])+parseFloat(equipoegreso[i]))
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalEgreso[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(totalEgreso[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr></tbody></table>"          
             document.getElementById("divEgresos").innerHTML=codigo
@@ -649,7 +650,7 @@ $(document).ready(function(){
             codigo+='<td>Total de ingresos</td>'
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalIngresos[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(totalIngresos[i]).toFixed(2)+"</td>"
             }
             
             codigo+="</tr>"
@@ -658,7 +659,7 @@ $(document).ready(function(){
             codigo+="<td>Total de egresos</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalEgreso[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(totalEgreso[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr>"
             
@@ -675,7 +676,7 @@ $(document).ready(function(){
                 prestamoreq[i]=0;
               }
               flujototaloper[i]=parseFloat(totalIngresos[i])-parseFloat(totalEgreso[i]);
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(flujototaloper[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(flujototaloper[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr></tbody></table>"          
             document.getElementById("divFlujoEfectivo").innerHTML=codigo
@@ -694,7 +695,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               flujoefecoperfinan[i]=parseFloat(flujototaloper[i]);
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(flujoefecoperfinan[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(flujoefecoperfinan[i]).toFixed(2)+"</td>"
             }
             codigo+="</tr>"
             
@@ -706,10 +707,10 @@ $(document).ready(function(){
             }
             
             codigo+='<tr><td>Efectivo inicial</td>'
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(0).toFixed(2))+'</td>'
+            codigo+='<td class="text-end">$'+parseFloat(0).toFixed(2)+'</td>'
             for (var i = 1; i < aniosProyecto; i++) 
             { 
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(efectivoinicial[i]).toFixed(2))+'</td>'    
+              codigo+='<td class="text-end">$'+parseFloat(efectivoinicial[i]).toFixed(2)+'</td>'    
             }
             codigo+='</tr>'
             
@@ -717,7 +718,7 @@ $(document).ready(function(){
               
             for (var i = 0; i < aniosProyecto; i++) 
             { 
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]).toFixed(2))+'</td>'   
+              codigo+='<td class="text-end">$'+parseFloat(saldofinal[i]).toFixed(2)+'</td>'   
             }
             codigo+="</tr></tbody></table>"          
             document.getElementById("divFlujoEfecFinan").innerHTML=codigo
@@ -740,7 +741,7 @@ $(document).ready(function(){
             codigo+='<td>Flujo neto de efectivo</td>'
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(saldofinal[i]).toFixed(2)+"</td>"
             }
             
             codigo+="</tr>"
@@ -755,7 +756,7 @@ $(document).ready(function(){
                 sumaflujo+=saldofinal[j]
               }
             
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(sumaflujo).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(sumaflujo).toFixed(2)+"</td>"
             }
             codigo+="</tr></tbody></table>"          
             document.getElementById("divMetRecInv").innerHTML=codigo
@@ -776,7 +777,7 @@ $(document).ready(function(){
             codigo+='<td>Flujo neto de efectivo</td>'
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(saldofinal[i]).toFixed(2)+"</td>"
             }
             
             codigo+="</tr>"
@@ -786,7 +787,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               flujoefecdesc[i]=parseFloat(saldofinal[i]/Math.pow((1+tasaMin),(i+1)));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]/Math.pow((1+tasaMin),(i+1))).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(saldofinal[i]/Math.pow((1+tasaMin),(i+1))).toFixed(2)+"</td>"
             }
             
             codigo+="</tr>"
@@ -800,7 +801,7 @@ $(document).ready(function(){
               {
                 sumaflujo+=flujoefecdesc[j];
               }
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(sumaflujo).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">$'+parseFloat(sumaflujo).toFixed(2)+"</td>"
             }
             codigo+="</tr></tbody></table>"          
             document.getElementById("divMetRecInvDes").innerHTML=codigo
@@ -863,6 +864,16 @@ $(document).ready(function(){
               $("#metodovalorpresente").html("Con un VPN de "+parseFloat(vpn).toFixed(2)+" < "+1+" El proyecto se rechaza");
             }
             //////////////////////////////////////////////
+          }//fin del if que checa si el arreglo MateriasPrimas tiene datos
+          else
+          {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Aún no has agregado materias primas',
+              footer: 'Ve a la sección de materias primas'
+            })
+          }
         }
         else
         {
@@ -872,11 +883,58 @@ $(document).ready(function(){
     })
 
     //////////////////////////////////////////////////////////////////////////////////
-    //Formato de modena
-    var formMoneda=new Intl.NumberFormat('eng-US',{
-      style:'currency',
-      currency:'USD'
+    //FORMULARIO DE LAS MATERIAS PRIMAS
+    $(document).on('click','#agregarMateriaP', function()
+    {
+      var nombreMateriaP=document.getElementById('nombreMateriaP').value
+      var costoMateriaP=document.getElementById('costoMateriaP').value
+      var incrementoCostoAnualMateriaP=document.getElementById('incrementoCostoAnualMateriaP').value
+
+      //checar si hay datos en los campos
+      if(!(nombreMateriaP==''||costoMateriaP==''||incrementoCostoAnualMateriaP==''))//si los campos estan completos
+      {
+        let NvoMateria={'id':id,
+        'nombre':nombreMateriaP,
+        'costo':costoMateriaP,
+        'incCosto':incrementoCostoAnualMateriaP,
+        'botonEliminar':'<button class="btn btn-danger btnEliminar" id="'+id+'">Eliminar</button>'};
+        MateriasPrimas.push(NvoMateria);//agregar en el arreglo
+        id++; //incrementar id
+
+        ActualizarTablaMatP();
+      }
     });
 
+    //////////////////////////////////////////////////////////////////////////////////
+    //Metodo para actualizar la tabla de materias primas
+    function ActualizarTablaMatP()
+    {
+      document.getElementById('divTablaMatP').style.display='none';//ocultar contenido
+      var codigoT='<table class="table table-bordered"><thead class="table-dark"><tr><th class="text-center" colspan="4">Materias primas</th></tr>';
+      codigoT+='<tr><th scope="col" class="text-center">Nombre</th><th scope="col" class="text-center">Costo por unidad</th><th scope="col" class="text-center">Incremento anual del costo</th><th scope="col" class="text-center"></th></tr>';
+      codigoT+='</thead><tbody>'
+      
+      for(var i=0;i<MateriasPrimas.length;i++)
+      {
+        codigoT+='<tr>'
+        codigoT+='<td class="text-center">'+MateriasPrimas[i].nombre+'</td>'
+        codigoT+='<td class="text-end">$'+MateriasPrimas[i].costo+'</td>'
+        codigoT+='<td class="text-end">'+MateriasPrimas[i].incCosto+'%</td>'
+        codigoT+='<td class="text-center">'+MateriasPrimas[i].botonEliminar+'</td>'
+        codigoT+='</tr>'
+      }
+
+      codigoT+='</tbody></table>'
+      document.getElementById('divTablaMatP').innerHTML=codigoT;
+      document.getElementById('divTablaMatP').style.display='';//mostrar contenido
+    }
+    //////////////////////////////////////////////////////////////////////////////////
+    //Eliminar una materia prima
+    $(document).on('click','.btnEliminar', function()
+    {
+      let id = $(this).attr("id");//obtener id del boton
+      MateriasPrimas=MateriasPrimas.filter(element=>element.id!=id)//elimina la materia prima
+      ActualizarTablaMatP();
+    });
     
 });
