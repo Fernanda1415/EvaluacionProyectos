@@ -48,7 +48,7 @@
 
 </head>
 <body>
-    <?php include("./../pages/comunes/header_inicio.html");?>
+    <?php include("./../pages/comunes/header_simulador.html");?>
     <?php include("./index.html");?>
     <?php include("./../pages/comunes/footer.html");?>   
     
