@@ -46,7 +46,7 @@
 
 </head>
 <body>
-    <?php include("./../comunes/header_inicio.html");?>   
+    <?php include("./../comunes/header_referencias.html");?>   
     <?php include("index.html");?>
     <?php include("./../comunes/footer.html");?>   
     
