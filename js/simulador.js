@@ -15,7 +15,11 @@ $(document).ready(function(){
           form.classList.add('was-validated')
         }, false)
       })
-    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Variables para la cuota anual del edificio y equipo
+    var cuotaAnualEdificio=0;
+    var cuotaAnualEquipo=0;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
       $('#formDatos').on('submit',function(event){
         if (!event.isDefaultPrevented()) {//si el submit es valido
             // everything looks good!
@@ -27,7 +31,7 @@ $(document).ready(function(){
             var aniosProyecto=document.querySelector('#aniosProyecto').value;
             var limiteProd=document.querySelector("#limiteProd").value;
             var precioUnidadTerceros=document.querySelector("#precioUnidadTerceros").value;
-            var tasaMin=document.querySelector("#tasaMin").value;
+            var tasaMin=document.querySelector("#tasaMin").value/100;
             var unidadesVend=document.querySelector("#unidadesVend").value;
             var tasaAnualUni=document.querySelector("#tasaAnualUni").value;
             var precioUnidad=document.querySelector("#precioUnidad").value;
@@ -97,11 +101,16 @@ $(document).ready(function(){
             var inversioninicial;
             var sumasaldofinal;
             var sumaflujoefecdesc;
+          
+            var valorRecuperacionEqui=[];
+            var valorRecuperacionEdificio=[];
+            
             ////////////////////////////////////////////
             var codigo='';
             //////////////////////////////////////////////
             /*Inversion inicial */
-            inversioninicial=parseFloat(valorTerreno)+parseFloat(valorEdificio)+parseFloat(valorEqui);
+            inversioninicial=parseFloat(valorTerreno)+parseFloat(valorEdificio)+parseFloat(valorEqui)+parseFloat(capTrabajo);
+    
             //////////////////////////////////////////////
             /*COSTOS Y GASTOS */
             codigo='';
@@ -285,13 +294,14 @@ $(document).ready(function(){
               costomantenimientoequipoanio[i]=costomantenimientoequipoanio[i-1]*(1+parseFloat(incrementoCostoAnualMantEqu/100));
               codigo+='<td class="text-end">'+formMoneda.format(parseFloat(costomantenimientoequipoanio[i]).toFixed(2))+"</td>"
             }
+           
             codigo+="</tr>"
         
             codigo+="<tr>"
             codigo+="<td>Total de costos de producción</td>"
             for (var i =0; i < aniosProyecto; i++) 
             {
-              totalcostoproduccion[i]=parseFloat(totalcostomateriaAanio[i])+parseFloat(totalcostomateriaBanio[i])+parseFloat(totalcostomateriales[i])+parseFloat(totalcostomanoobraanio)+parseFloat(costomantenimientoequipoanio[i]);
+              totalcostoproduccion[i]=parseFloat(totalcostomateriaAanio[i])+parseFloat(totalcostomateriaBanio[i])+parseFloat(totalcostomateriales[i])+parseFloat(totalcostomanoobraanio[i])+parseFloat(costomantenimientoequipoanio[i]);
               codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalcostoproduccion[i]).toFixed(2))+"</td>"
             };
             codigo+="</tr></tbody></table>"
@@ -357,7 +367,7 @@ $(document).ready(function(){
             for(var i = 0; i < aniosProyecto; i++) 
             {
               ventasedo[i]=parseFloat(unidadesporanio[i])*parseFloat(precioporanio[i]);
-              codigo+="<td>"+parseFloat(ventasedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(ventasedo[i]).toFixed(2))+"</td>"
             }
             codigo+='</tr>'
 
@@ -374,7 +384,7 @@ $(document).ready(function(){
             codigo+="<td>IVA</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+="<td>"+parseFloat(ivaedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(ivaedo[i]).toFixed(2))+"</td>"
             };
             
             codigo+="</tr>"
@@ -383,17 +393,17 @@ $(document).ready(function(){
             codigo+="<td>Ventas Netas</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+="<td>"+parseFloat(ventasnetasedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(ventasnetasedo[i]).toFixed(2))+"</td>"
             }
             codigo+="</tr>"
             
             codigo+="<tr>"
-            codigo+="<td>Costos de produccion</td>"
+            codigo+="<td>Costos de producción</td>"
             
             for (var i = 0; i < aniosProyecto; i++) 
             {
               costosproduccionedo[i]=parseFloat(totalcostoproduccion[i])
-              codigo+="<td>"+parseFloat(costosproduccionedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(costosproduccionedo[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -402,7 +412,7 @@ $(document).ready(function(){
             
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+="<td>"+parseFloat(totalDepreciacion).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(totalDepreciacion).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -413,7 +423,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               utilidadbrutaedo[i]=parseFloat(ventasnetasedo[i])-parseFloat(costosproduccionedo[i])-parseFloat(totalDepreciacion);
-              codigo+="<td>"+parseFloat(utilidadbrutaedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(utilidadbrutaedo[i]).toFixed(2))+"</td>"
             };
             
             codigo+="</tr>"
@@ -425,7 +435,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               gastoventaedo[i]=parseFloat(gastoventaanio[i])*parseFloat(unidadesporanio);
-              codigo+="<td>"+parseFloat(gastoventaedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(gastoventaedo[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -436,7 +446,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               gastoadminedo[i]=parseFloat(gastoadminanio[i])*parseFloat(unidadesporanio);
-              codigo+="<td>"+parseFloat(gastoadminedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(gastoadminedo[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -447,7 +457,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               utilidadoperedo[i]=parseFloat(utilidadbrutaedo[i])-parseFloat(gastoadminedo[i])-parseFloat(gastoventaedo[i]);
-              codigo+="<td>"+parseFloat(utilidadoperedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(utilidadoperedo[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -468,7 +478,7 @@ $(document).ready(function(){
             for (var i = 0; i < aniosProyecto; i++) 
             {
               utilidadantesimpuedo[i]=parseFloat(utilidadoperedo[i])-parseFloat(0);
-              codigo+="<td>"+parseFloat(utilidadantesimpuedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(utilidadantesimpuedo[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -480,45 +490,51 @@ $(document).ready(function(){
             {
               if (parseFloat(utilidadantesimpuedo[i])>=0  && parseFloat(utilidadantesimpuedo[i])<=999 ) 
               {
-                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.05)
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.05)//antes estaba en 0.05
               }
               else if(parseFloat(utilidadantesimpuedo[i])>=1000  && parseFloat(utilidadantesimpuedo[i])<=9999 )
               {
-                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.10)-50
+                //impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.10)-50
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.10)
               }
               else if(parseFloat(utilidadantesimpuedo[i])>=10000  && parseFloat(utilidadantesimpuedo[i])<=49999 )
               {
-                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.15)-950
+                //impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.15)-950
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.15)
               }
               else if(parseFloat(utilidadantesimpuedo[i])>=50000  && parseFloat(utilidadantesimpuedo[i])<=99999 )
               {
-                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.20)-6950
+                //impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.20)-6950
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.20)
               }
               else if(parseFloat(utilidadantesimpuedo[i])>=100000  && parseFloat(utilidadantesimpuedo[i])<=499999 )
               {
-                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.25)-16950
+                //impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.25)-16950
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.25)
               }
               else if(parseFloat(utilidadantesimpuedo[i])>=500000  && parseFloat(utilidadantesimpuedo[i])<=999999 )
               {
-                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.30)-116949
+                //impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.30)-116949
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.30)
               }
               else if(parseFloat(utilidadantesimpuedo[i])>=1000000)
               {
-                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.35)-266949
+                //impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.35)-266949
+                impuestoedo[i]=(parseFloat(utilidadantesimpuedo[i])*.35)
               }
-              codigo+="<td>"+parseFloat(impuestoedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(impuestoedo[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
             
             
             codigo+="<tr>"
-            codigo+="<td>Utilidad o perdida del ejercicio</td>"
+            codigo+="<td>Utilidad o pérdida del ejercicio</td>"
             
             for (var i = 0; i < aniosProyecto; i++) 
             {
                utilidadperdidaedo[i]=parseFloat(utilidadantesimpuedo[i])-parseFloat(impuestoedo[i]);
-              codigo+="<td>"+parseFloat(utilidadperdidaedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(utilidadperdidaedo[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -535,19 +551,56 @@ $(document).ready(function(){
             codigo+="</tr></thead><tbody>"
 
             codigo+='<tr>'
-            codigo+="<td>Pronostico de ventas</td>"
+            codigo+="<td>Pronóstico de ventas</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+="<td>"+parseFloat(ventasedo[i]).toFixed(2)+"</td>"
+              codigo+="<td>"+formMoneda.format(parseFloat(ventasedo[i]).toFixed(2))+"</td>"
             }
             codigo+="</tr>"
 
-            codigo+="<tr>"
-            codigo+="<td>Total de ingresos</td>"
+            codigo+='<tr>'
+            codigo+="<td>Valor de recuperación del equipo</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              totalIngresos[i]=ventasedo[i]
-              codigo+="<td>"+parseFloat(ventasedo[i]).toFixed(2)+"</td>"
+              if ((i+1)%vidaEqu==0) 
+              {
+                valorRecuperacionEqui[i]=valorRecEqu
+                codigo+='<td class="text-end">'+formMoneda.format(parseFloat(valorRecEqu).toFixed(2))+"</td>"
+              }
+              else
+              {
+                valorRecuperacionEqui[i]=0
+                codigo+='<td class="text-end">'+formMoneda.format(parseFloat(0).toFixed(2))+"</td>"
+              }
+            }
+
+            codigo+='<tr>'
+            codigo+="<td>Valor de recuperación del edificio</td>"
+            for (var i = 0; i < aniosProyecto; i++) 
+            {
+              if ((i+1)%vidaEdi==0) 
+              {
+                valorRecuperacionEdificio[i]=valorRecEdi
+                codigo+='<td class="text-end">'+formMoneda.format(parseFloat(valorRecEdi).toFixed(2))+"</td>"
+              }
+              else
+              {
+                valorRecuperacionEdificio[i]=0
+                codigo+='<td class="text-end">'+formMoneda.format(parseFloat(0).toFixed(2))+"</td>"
+              }
+            }
+            
+
+            codigo+="<tr>"
+            codigo+="<td>Total de ingresos</td>"
+
+            for (var i = 0; i < aniosProyecto; i++) 
+            {
+              //totalIngresos[i]=ventasedo[i]
+              //totalIngresos[i]=ventasnetasedo[i];este esstaba antes
+              //codigo+="<td>"+formMoneda.format(parseFloat(ventasedo[i]).toFixed(2))+"</td>"
+              totalIngresos[i]=parseFloat(ventasedo[i]) + parseFloat(valorRecuperacionEqui[i]) + parseFloat(valorRecuperacionEdificio[i])
+              codigo+="<td>"+formMoneda.format(parseFloat(totalIngresos[i]).toFixed(2))+"</td>"
             }
             codigo+="</tr>"
             codigo+="</tbody></table>"
@@ -610,10 +663,10 @@ $(document).ready(function(){
 
             codigo+="</tr>"
 
-            codigo+="<td>Equipo</td>"
+            codigo+="<td>Compra de equipo</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              if ((i+1)%5==0) 
+              if ((i+1)%vidaEqu==0) 
               {
                 equipoegreso[i]=valorEqui
                 codigo+='<td class="text-end">'+formMoneda.format(parseFloat(valorEqui).toFixed(2))+"</td>"
@@ -627,10 +680,14 @@ $(document).ready(function(){
 
             codigo+="</tr>"
 
+      
+            ///
+
             codigo+="<td>Total de egresos</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              totalEgreso[i]=(parseFloat(costoproducciontotalesanio[i])+parseFloat(gastoventaedo[i])+parseFloat(gastoadminedo[i])+parseFloat(0)+parseFloat(ivaedo[i])+parseFloat(impuestoedo[i])+parseFloat(equipoegreso[i]))
+              //totalEgreso[i]=(parseFloat(costoproducciontotalesanio[i])+parseFloat(gastoventaedo[i])+parseFloat(gastoadminedo[i])+parseFloat(0)+parseFloat(ivaedo[i])+parseFloat(impuestoedo[i])+parseFloat(equipoegreso[i]))
+              totalEgreso[i]=(parseFloat(costoproducciontotalesanio[i])+parseFloat(gastoventaedo[i])+parseFloat(gastoadminedo[i])+parseFloat(ivaedo[i])+parseFloat(impuestoedo[i])+parseFloat(equipoegreso[i]))
               codigo+='<td class="text-end">'+formMoneda.format(parseFloat(totalEgreso[i]).toFixed(2))+"</td>"
             }
             codigo+="</tr></tbody></table>"          
@@ -776,7 +833,8 @@ $(document).ready(function(){
             codigo+='<td>Flujo neto de efectivo</td>'
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]).toFixed(2))+"</td>"
+              //codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(flujoefecoperfinan[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -785,8 +843,9 @@ $(document).ready(function(){
             codigo+="<td>Flujo de efectivo descontado</td>"
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              flujoefecdesc[i]=parseFloat(saldofinal[i]/Math.pow((1+tasaMin),(i+1)));
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]/Math.pow((1+tasaMin),(i+1))).toFixed(2))+"</td>"
+              //flujoefecdesc[i]=parseFloat(saldofinal[i]/Math.pow((1+tasaMin),(i+1)));
+              flujoefecdesc[i]=parseFloat(flujoefecoperfinan[i]/Math.pow((1+tasaMin),(i+1)))
+              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(flujoefecdesc[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -810,8 +869,10 @@ $(document).ready(function(){
             sumasaldofinal=0
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              sumasaldofinal+=saldofinal[i];
+              //sumasaldofinal+=saldofinal[i];
+              sumasaldofinal+=flujoefecoperfinan[i]
             }          
+      
             rap=(sumasaldofinal/aniosProyecto)/inversioninicial
             if (rap>tasaMin) 
             {
@@ -849,19 +910,89 @@ $(document).ready(function(){
             //////////////////////////////////////////////
             /*Metodo del valor presente neto*/
             vpn=sumaflujoefecdesc-inversioninicial
-
             if (vpn>1) 
             {
-              $("#metodovalorpresente").html("Con un VPN de "+parseFloat(vpn).toFixed(2)+" > "+1+" El proyecto se aprueba");
+              $("#metodovalorpresente").html("Con un VPN de "+formMoneda.format(parseFloat(vpn).toFixed(2))+" > "+1+" El proyecto se aprueba");
             }
             else if(vpn=1)
             {
-              $("#metodovalorpresente").html("Con un VPN de "+parseFloat(vpn).toFixed(2)+" = "+1+" El proyecto es indiferente");
+              $("#metodovalorpresente").html("Con un VPN de "+formMoneda.format(parseFloat(vpn).toFixed(2))+" = "+1+" El proyecto es indiferente");
             }
             else
             {
-              $("#metodovalorpresente").html("Con un VPN de "+parseFloat(vpn).toFixed(2)+" < "+1+" El proyecto se rechaza");
+              $("#metodovalorpresente").html("Con un VPN de "+formMoneda.format(parseFloat(vpn).toFixed(2))+" < "+1+" El proyecto se rechaza");
             }
+            //////////////////////////////////////////////
+            /*TIR*/
+            var sumaVP=0;
+            var bandera=false;
+            var bandIni=false;
+            var porcentajeIni=0//se empieza con el 10%
+            var tasaTIR_1=0;
+            var tasaTIR_2=0;
+            var vp1=0;
+            var vp2=0;
+            var valorTIR=0;
+            var listaVP=[]
+            while(bandera==0)
+            {
+              if(bandIni==false)//primer calculo(año 1)
+              {
+                for(var i=0;i<aniosProyecto;i++)
+                {
+                  sumaVP=sumaVP+parseFloat(flujoefecoperfinan[i])/parseFloat(Math.pow((1+porcentajeIni),(i+1)))
+                  
+                }
+              
+                sumaVP=parseFloat(sumaVP)-parseFloat(inversioninicial) 
+                if(sumaVP==0)//checar si no hay diferencia, la tir es el porcentajeIni
+                {
+                  valorTIR=porcentajeIni;
+                  bandera=1;//salir del while
+                }
+                else if(sumaVP>0)//aun se puede aumentar el porcentajeIni
+                {
+                  vp1=sumaVP
+                  tasaTIR_1=porcentajeIni
+                  bandIni=true//para que ya no entre a este if
+                }
+                else//sumaVP<O  se inicia con un porcentaje menor y se empieza desde 0
+                {
+                  porcentajeIni-=0.11
+                }
+              }
+              else//para los demas casos (ya se cuenta con un valor en vp1 y se hara la comparacion)
+              {
+                sumaVP=0;
+                //calcular vp2
+                porcentajeIni+=0.10//aumentar porcentaje
+                for(var i=0;i<aniosProyecto;i++)
+                {
+                  sumaVP=sumaVP+parseFloat(flujoefecoperfinan[i])/parseFloat(Math.pow((1+porcentajeIni),(i+1)))
+                }
+                sumaVP=parseFloat(sumaVP)-parseFloat(inversioninicial)
+                if(sumaVP==0)//checar si no hay diferencia, la tir es el porcentajeIni
+                {
+                  valorTIR=porcentajeIni;
+                  bandera=1;//salir del while
+                }
+                else if(sumaVP>0)//aun se puede aumentar el porcentajeIni
+                {
+                  vp1=sumaVP
+                  tasaTIR_1=porcentajeIni
+                }
+                else if(sumaVP<0)//sumaVP<O se hace el calculo de la tir
+                {
+                  vp2=sumaVP
+                  tasaTIR_2=porcentajeIni
+                  //Calcular la TIR
+                  valorTIR=((vp1*tasaTIR_2)-(vp2*tasaTIR_1))/(vp1-vp2)
+                  bandera=1;
+                }
+              }
+
+            }
+            $("#metodoTIR").html("La TIR es de: "+parseFloat(valorTIR*100).toFixed(2)+'%');
             //////////////////////////////////////////////
         }
         else
@@ -877,6 +1008,102 @@ $(document).ready(function(){
       style:'currency',
       currency:'USD'
     });
-
-    
+    //////////////////////////////////////////////////////////////////////////////////
+    //Detectar cualquier cambio en el input del valor del edificio
+    $('#valorEdificio').on('input',function()
+    {
+        var valEdificio=parseFloat($('#valorEdificio').val());
+        var valRecEdificio=parseFloat($('#valorRecEdi').val());
+        var vidaUtilEdi=parseFloat($('#vidaEdi').val());
+        if(valEdificio>0 && valRecEdificio>0 && vidaUtilEdi>0)//checar si hay datos en los 3 parametros
+        {
+          cuotaAnualEdificio=(valEdificio-valRecEdificio)/vidaUtilEdi
+          document.getElementById('cuotaAnualEdi').innerHTML=formMoneda.format(parseFloat(cuotaAnualEdificio).toFixed(2));
+        }
+        else
+        {
+            document.getElementById('cuotaAnualEdi').innerHTML=formMoneda.format(parseFloat(0).toFixed(2));;
+        }
+    });
+    //Detectar cualquier cambio en el input del valor de recuperacion del edificio
+    $('#valorRecEdi').on('input',function()
+    {
+        var valEdificio=parseFloat($('#valorEdificio').val());
+        var valRecEdificio=parseFloat($('#valorRecEdi').val());
+        var vidaUtilEdi=parseFloat($('#vidaEdi').val());
+        if(valEdificio>0 && valRecEdificio>0 && vidaUtilEdi>0)//checar si hay datos en los 3 parametros
+        {
+          cuotaAnualEdificio=(valEdificio-valRecEdificio)/vidaUtilEdi
+          document.getElementById('cuotaAnualEdi').innerHTML=formMoneda.format(parseFloat(cuotaAnualEdificio).toFixed(2));
+        }
+        else
+        {
+            document.getElementById('cuotaAnualEdi').innerHTML=formMoneda.format(parseFloat(0).toFixed(2));;
+        }
+    });
+    //Detectar cualquier cambio en el input de vida util del edificio
+    $('#vidaEdi').on('input',function()
+    {
+        var valEdificio=parseFloat($('#valorEdificio').val());
+        var valRecEdificio=parseFloat($('#valorRecEdi').val());
+        var vidaUtilEdi=parseFloat($('#vidaEdi').val());
+        if(valEdificio>0 && valRecEdificio>0 && vidaUtilEdi>0)//checar si hay datos en los 3 parametros
+        {
+          cuotaAnualEdificio=(valEdificio-valRecEdificio)/vidaUtilEdi
+          document.getElementById('cuotaAnualEdi').innerHTML=formMoneda.format(parseFloat(cuotaAnualEdificio).toFixed(2));
+        }
+        else
+        {
+            document.getElementById('cuotaAnualEdi').innerHTML=formMoneda.format(parseFloat(0).toFixed(2));;
+        }
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Detectar cualquier cambio en el input del valor del equipo
+    $('#valorEqui').on('input',function()
+    {
+        var valEquipo=parseFloat($('#valorEqui').val());
+        var valRecEquipo=parseFloat($('#valorRecEqu').val());
+        var vidaUtilEquipo=parseFloat($('#vidaEqu').val());
+        if(valEquipo>0 && valRecEquipo>0 && vidaUtilEquipo>0)//checar si hay datos en los 3 parametros
+        {
+          cuotaAnualEquipo=(valEquipo-valRecEquipo)/vidaUtilEquipo
+          document.getElementById('cuotaAnualEquipo').innerHTML=formMoneda.format(parseFloat(cuotaAnualEquipo).toFixed(2));
+        }
+        else
+        {
+            document.getElementById('cuotaAnualEquipo').innerHTML=formMoneda.format(parseFloat(0).toFixed(2));;
+        }
+    });
+    //Detectar cualquier cambio en el input del valor de recuperación del equipo
+    $('#valorRecEqu').on('input',function()
+    {
+        var valEquipo=parseFloat($('#valorEqui').val());
+        var valRecEquipo=parseFloat($('#valorRecEqu').val());
+        var vidaUtilEquipo=parseFloat($('#vidaEqu').val());
+        if(valEquipo>0 && valRecEquipo>0 && vidaUtilEquipo>0)//checar si hay datos en los 3 parametros
+        {
+          cuotaAnualEquipo=(valEquipo-valRecEquipo)/vidaUtilEquipo
+          document.getElementById('cuotaAnualEquipo').innerHTML=formMoneda.format(parseFloat(cuotaAnualEquipo).toFixed(2));
+        }
+        else
+        {
+            document.getElementById('cuotaAnualEquipo').innerHTML=formMoneda.format(parseFloat(0).toFixed(2));;
+        }
+    });
+    //Detectar cualquier cambio en el input de vida del equipo
+    $('#vidaEqu').on('input',function()
+    {
+        var valEquipo=parseFloat($('#valorEqui').val());
+        var valRecEquipo=parseFloat($('#valorRecEqu').val());
+        var vidaUtilEquipo=parseFloat($('#vidaEqu').val());
+        if(valEquipo>0 && valRecEquipo>0 && vidaUtilEquipo>0)//checar si hay datos en los 3 parametros
+        {
+          cuotaAnualEquipo=(valEquipo-valRecEquipo)/vidaUtilEquipo
+          document.getElementById('cuotaAnualEquipo').innerHTML=formMoneda.format(parseFloat(cuotaAnualEquipo).toFixed(2));
+        }
+        else
+        {
+            document.getElementById('cuotaAnualEquipo').innerHTML=formMoneda.format(parseFloat(0).toFixed(2));;
+        }
+    });
 });
