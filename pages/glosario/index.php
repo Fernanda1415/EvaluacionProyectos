@@ -6,7 +6,7 @@
 <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bibliografía</title>
+  <title>Glosario</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,7 +46,7 @@
 
 </head>
 <body>
-    <?php include("./../comunes/header_inicio.html");?>   
+    <?php include("./../comunes/header_glosario.html");?>   
     <?php include("index.html");?>
     <?php include("./../comunes/footer.html");?>   
     
