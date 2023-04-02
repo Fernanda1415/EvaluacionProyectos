@@ -58,6 +58,7 @@ $(document).ready(function(){
             var valorRecEqu=document.querySelector("#valorRecEqu").value;
             var vidaEqu=document.querySelector("#vidaEqu").value;
             var capTrabajo=document.querySelector("#capTrabajo").value;
+            var gastosFinancieros=document.querySelector('#gastosFinan').value;
             /////////////////////////////////////////////
             var unidadesporanio=[];
             var precioporanio=[];
@@ -104,7 +105,8 @@ $(document).ready(function(){
           
             var valorRecuperacionEqui=[];
             var valorRecuperacionEdificio=[];
-            
+            var flujosAcumulados=[];
+            var flujosAcumuladosDes=[]
             ////////////////////////////////////////////
             var codigo='';
             //////////////////////////////////////////////
@@ -755,7 +757,7 @@ $(document).ready(function(){
             }
             codigo+="</tr>"
             
-            efectivoinicial[0]=0;
+            efectivoinicial[0]=parseFloat(gastosFinancieros);
             for (var i = 0; i < aniosProyecto; i++) 
             { 
               saldofinal[i]=parseFloat(flujoefecoperfinan[i])+parseFloat(efectivoinicial[i]);
@@ -763,8 +765,8 @@ $(document).ready(function(){
             }
             
             codigo+='<tr><td>Efectivo inicial</td>'
-            codigo+='<td class="text-end">'+formMoneda.format(parseFloat(0).toFixed(2))+'</td>'
-            for (var i = 1; i < aniosProyecto; i++) 
+            //codigo+='<td class="text-end">'+formMoneda.format(parseFloat(0).toFixed(2))+'</td>'
+            for (var i = 0; i < aniosProyecto; i++) 
             { 
               codigo+='<td class="text-end">'+formMoneda.format(parseFloat(efectivoinicial[i]).toFixed(2))+'</td>'    
             }
@@ -797,7 +799,7 @@ $(document).ready(function(){
             codigo+='<td>Flujo neto de efectivo</td>'
             for (var i = 0; i < aniosProyecto; i++) 
             {
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(saldofinal[i]).toFixed(2))+"</td>"
+              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(flujoefecoperfinan[i]).toFixed(2))+"</td>"
             }
             
             codigo+="</tr>"
@@ -809,16 +811,56 @@ $(document).ready(function(){
               sumaflujo=0;
               for (var j = 0; j <= i; j++) 
               {
-                sumaflujo+=saldofinal[j]
+                sumaflujo+=flujoefecoperfinan[j]
               }
-            
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(sumaflujo).toFixed(2))+"</td>"
+              flujosAcumulados[i]=sumaflujo;
+              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(flujosAcumulados[i]).toFixed(2))+"</td>"
             }
-            codigo+="</tr></tbody></table>"          
-            document.getElementById("divMetRecInv").innerHTML=codigo
+            codigo+="</tr>"         
+            
             //falta algo XD //esta es nota del otro autor
 
+            //Calcular el tiempo de recuperacion
+            var flujo_1=0
+            var anioPeriodo=0;
+            for(var i=0;i<aniosProyecto;i++)
+            {
+                if(flujosAcumulados[i]<inversioninicial)//aun no se cubre la inversion inicial
+                {
+                  flujo_1=flujosAcumulados[i]
+                }
+                else if(flujosAcumulados[i]>inversioninicial)//cuando ya se pasa de la inversion inicial
+                {
+                  anioPeriodo=i+(inversioninicial-flujo_1)/flujoefecoperfinan[i];
+                  break;
+                }
+                else if(flujosAcumulados[i]==inversioninicial)
+                {
+                  anioPeriodo=i;
+                  break;
+                }
+              
+            }
+            //Calcular anio, meses y dias
+            var anioPerSTR=anioPeriodo.toString().split('.');//separar por decimal
+            var mesPeriodo=0;
+            var mesPerSTR=0;
+            var diasPeriodo=0;
 
+            if(anioPerSTR.length>1 && parseFloat(anioPerSTR[1])>0)//si hay decimal calcular los meses
+            {
+              mesPeriodo=parseFloat('0.'+anioPerSTR[1]).toFixed(2);
+              mesPeriodo=parseFloat(mesPeriodo*12)//obtener el num de meses
+              mesPerSTR=mesPeriodo.toString().split('.')//separar por decimal los meses
+              if(mesPerSTR.length>1 && parseFloat(mesPerSTR[1])>0)//si hay decimal calcular los dias
+              {
+                diasPeriodo=parseFloat('0.'+mesPerSTR[1]).toFixed(2);
+                diasPeriodo=parseFloat(diasPeriodo*30)//obtener el num de dias
+              }
+            }
+            codigo+='<tr><th class="text-center" colspan="'+aniosProyecto+1+'">Tiempo de recuperación de la inversión: '+parseFloat(Math.trunc(anioPeriodo))+' años, '+parseFloat(Math.trunc(mesPeriodo))+' meses y '+parseFloat(Math.trunc(diasPeriodo))+' días.</th></tr>'
+            codigo+="</tbody></table>" 
+            document.getElementById("divMetRecInv").innerHTML=codigo
             //////////////////////////////////////////////
             /*Metodo de periodo de recuperacion de la inversión descontado:*/
             var codigo='';
@@ -859,10 +901,52 @@ $(document).ready(function(){
               {
                 sumaflujo+=flujoefecdesc[j];
               }
-              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(sumaflujo).toFixed(2))+"</td>"
+              flujosAcumuladosDes[i]=sumaflujo;
+              codigo+='<td class="text-end">'+formMoneda.format(parseFloat(flujosAcumuladosDes[i]).toFixed(2))+"</td>"
             }
-            codigo+="</tr></tbody></table>"          
-            document.getElementById("divMetRecInvDes").innerHTML=codigo
+            codigo+="</tr>"
+            //Calcular el tiempo de recuperacion
+            var flujo_1=0
+            var anioPeriodo=0;
+            for(var i=0;i<aniosProyecto;i++)
+            {
+                if(flujosAcumuladosDes[i]<inversioninicial)//aun no se cubre la inversion inicial
+                {
+                  flujo_1=flujosAcumuladosDes[i]
+                }
+                else if(flujosAcumuladosDes[i]>inversioninicial)//cuando ya se pasa de la inversion inicial
+                {
+                  anioPeriodo=i+(inversioninicial-flujo_1)/flujoefecdesc[i];
+                  break;
+                }
+                else if(flujosAcumuladosDes[i]==inversioninicial)
+                {
+                  anioPeriodo=i;
+                  break;
+                }
+              
+            }
+            //Calcular anio, meses y dias
+            var anioPerSTR=anioPeriodo.toString().split('.');//separar por decimal
+            var mesPeriodo=0;
+            var mesPerSTR=0;
+            var diasPeriodo=0;
+
+            if(anioPerSTR.length>1 && parseFloat(anioPerSTR[1])>0)//si hay decimal calcular los meses
+            {
+              mesPeriodo=parseFloat('0.'+anioPerSTR[1]).toFixed(2);
+              mesPeriodo=parseFloat(mesPeriodo*12)//obtener el num de meses
+              mesPerSTR=mesPeriodo.toString().split('.')//separar por decimal los meses
+              if(mesPerSTR.length>1 && parseFloat(mesPerSTR[1])>0)//si hay decimal calcular los dias
+              {
+                diasPeriodo=parseFloat('0.'+mesPerSTR[1]).toFixed(2);
+                diasPeriodo=parseFloat(diasPeriodo*30)//obtener el num de dias
+              }
+            }
+            codigo+='<tr><th class="text-center" colspan="'+aniosProyecto+1+'">Tiempo de recuperación de la inversión: '+parseFloat(Math.trunc(anioPeriodo))+' años, '+parseFloat(Math.trunc(mesPeriodo))+' meses y '+parseFloat(Math.trunc(diasPeriodo))+' días.</th></tr>'
+            codigo+="</tbody></table>"          
+            document.getElementById("divMetRecInvDes").innerHTML=codigo;
+            
             //////////////////////////////////////////////
             /*Metodo de rendimiento anual promedio*/
             
