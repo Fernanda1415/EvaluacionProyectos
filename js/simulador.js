@@ -17,8 +17,8 @@ $(document).ready(function(){
       })
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Variables para la cuota anual del edificio y equipo
-    var cuotaAnualEdificio=0;
-    var cuotaAnualEquipo=0;
+    var cuotaAnualEdificio=(500000-1)/30;
+    var cuotaAnualEquipo=(1000000-100000)/5;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
       $('#formDatos').on('submit',function(event){
         if (!event.isDefaultPrevented()) {//si el submit es valido
