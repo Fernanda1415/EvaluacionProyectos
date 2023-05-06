@@ -891,6 +891,13 @@ section {
   transition: ease-in-out 0.3s;
 }
 
+/**elemento nuevo************/
+.services .icon-box h3 a {
+  color: #37517e;
+  transition: ease-in-out 0.3s;
+}
+/*****************************************/
+
 .services .icon-box p {
   line-height: 24px;
   font-size: 14px;
