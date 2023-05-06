@@ -6,7 +6,7 @@
 <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Glosario</title>
+  <title>Actividad de aprendizaje</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,7 +46,7 @@
 
 </head>
 <body>
-    <?php include("./../comunes/header_glosario.html");?>   
+    <?php include("./../comunes/header_actividad.html");?>   
     <?php include("index.html");?>
     <?php include("./../comunes/footer.html");?>   
     
@@ -75,7 +75,7 @@
 
   <!-- Template Main JS File -->
   <script src="./../../assets/js/main.js"></script>
-  <script src="./../../js/glosario.js"></script>
+
   
 </body>
 </html>
