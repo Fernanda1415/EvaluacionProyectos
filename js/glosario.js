@@ -148,5 +148,5 @@ $(document).ready(function(){
     boton.addEventListener('click',filtrar)
     buscador.addEventListener('keyup',filtrar)
 
-    filtrar();//opcional(es para que aparezcan todos los conceptos al principio)
+    //filtrar();//opcional(es para que aparezcan todos los conceptos al principio)
 });
