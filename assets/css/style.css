@@ -154,7 +154,7 @@ h6 {
 */
 .navbar {
   padding: 0;
-  padding-left: 90px; /*cambios (antes no estaba esta caracteristica)*/
+  padding-left: 10px; /*cambios (antes no estaba esta caracteristica)*/
 }
 
 .navbar ul {
@@ -890,6 +890,13 @@ section {
   color: #37517e;
   transition: ease-in-out 0.3s;
 }
+
+/**elemento nuevo************/
+.services .icon-box h3 a {
+  color: #37517e;
+  transition: ease-in-out 0.3s;
+}
+/*****************************************/
 
 .services .icon-box p {
   line-height: 24px;
@@ -1705,6 +1712,14 @@ section {
   width: calc(100% - 100px);
 }
 
+/*Elemento nuevo***********/
+#footer .footer-newsletter form input[type=text] {
+  border: 0;
+  padding: 4px 8px;
+  width: calc(100% - 100px);
+}
+/**************************/
+
 #footer .footer-newsletter form input[type=submit] {
   position: absolute;
   top: 0;
@@ -1724,6 +1739,29 @@ section {
 #footer .footer-newsletter form input[type=submit]:hover {
   background: #209dd8;
 }
+
+/*******Elementos nuevos********/
+#footer .footer-newsletter form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  background: #47b2e4;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 50px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+#footer .footer-newsletter form button:hover {
+  background: #209dd8;
+}
+/*******************************************/
+
 
 #footer .footer-top {
   padding: 60px 0 30px 0;
