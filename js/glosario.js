@@ -295,7 +295,7 @@ $(document).ready(function(){
         {
             let concepto=elemento.concepto.toLowerCase();
             let descripcion=elemento.descripcion.toLowerCase();
-            if(concepto.indexOf(texto)!== -1 || descripcion.indexOf(texto)!==-1)
+            if(concepto.indexOf(texto)!== -1)
             {
                 resultado.innerHTML+=elemento.codigo
     
