@@ -175,7 +175,7 @@ h6 {
   align-items: center;
   justify-content: space-between;
   padding: 10px 0 10px 30px;
-  font-size: 15px;
+  font-size: 18px;/*antes estaba en 15px*/
   font-weight: 500;
   color: #fff;
   white-space: nowrap;
@@ -202,7 +202,7 @@ h6 {
   margin-left: 30px;
   border-radius: 50px;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px; /*antes estaba en 14px*/
   border: 2px solid #47b2e4;
   font-weight: 600;
 }
@@ -417,6 +417,11 @@ h6 {
   margin-bottom: 50px;
   font-size: 24px;
 }
+.fuente-img{
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 50px;
+  font-size: 13px;
+}
 
 #hero .btn-get-started {
   font-family: "Jost", sans-serif;
@@ -479,6 +484,11 @@ h6 {
 
   #hero .hero-img img {
     width: 50%;
+  }
+
+  /*nuevo elemento*/
+  #hero .hero-img h6 {
+    color: white;
   }
 }
 
