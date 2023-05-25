@@ -1903,3 +1903,11 @@ section {
     padding-top: 4px;
   }
 }
+/*****ELEMENTO NUEVOS**********************/
+.texto p{
+  color: black;
+}
+.texto ul li{
+  color: black; 
+}
+/*******************************************/
