@@ -79,6 +79,7 @@
   <script src="./../../js/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <script src="./../../js/glosario.js"></script>
+  <script src="./../../js/main.js"></script>
   
 </body>
 </html>

@@ -80,7 +80,7 @@
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 4) {  //inicialmente window.srollY estaba como window.scrollY>100
         selectHeader.classList.add('header-scrolled')
       } else {
         selectHeader.classList.remove('header-scrolled')
@@ -113,6 +113,14 @@
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
+    var nav=document.getElementById('imgIPN')
+    nav.innerHTML=''
+
+    nav=document.getElementById('imgESCOM')
+    nav.innerHTML=''
+
+    nav=document.getElementById('logoCasa')
+    nav.style.color='#37517e'
   })
 
   /**
@@ -253,5 +261,6 @@
       mirror: false
     });
   });
+
 
 })()

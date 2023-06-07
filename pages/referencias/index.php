@@ -32,7 +32,7 @@
 <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
      <!-- Normalize CSS -->
 	<!-- Normalize CSS -->
-	<link rel="stylesheet" href="./css/normalize.css">    
+	<link rel="stylesheet" href="./../../css/normalize.css">    
      <!-- Iconos -->
      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
@@ -75,7 +75,6 @@
 
   <!-- Template Main JS File -->
   <script src="./../../assets/js/main.js"></script>
-
-  
+  <script src="./../../js/main.js"></script>
 </body>
 </html>
