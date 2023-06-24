@@ -47,7 +47,7 @@
 </head>
 <body>
     <?php include("./../comunes/header_actividad.html");?>   
-    <?php include("index.html");?>
+    <?php include("./index.html");?>
     <?php include("./../comunes/footer.html");?>   
     
     <!--  Alert JS -->
